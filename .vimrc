@@ -10,6 +10,28 @@
 " properly set to work with the Vim-related packages available in Debian.
 runtime! debian.vim
 
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Plugin 'gmarik/vundle'
+Plugin 'tpope/vim-fugitive'
+Plugin 'Lokaltog/vim-easymotion'
+filetype plugin indent on
+
+" get rid of preview window when done
+autocmd CursorMovedI * if pumvisible() == 0|silent! pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
+
+filetype off
+execute pathogen#incubate()
+call pathogen#helptags() " generate helptags for everything in 'runtimepath'
+filetype plugin indent on
+
+set sessionoptions-=options
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+
 " enables syntax highlighting by default.
 if has("syntax")
 syntax on
@@ -24,7 +46,7 @@ if has("autocmd")
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-" load indentation rules and plugins according to the detected filetype.
+" load indentation rules and  according to the detected filetype.
 if has("autocmd")
 filetype plugin indent on
 set nocp
@@ -40,6 +62,8 @@ set incsearch		" Incremental search
 set autowrite		" save before commands like :next and :make
 set hidden             " Hide buffers when they are abandoned
 set mouse=a		" Enable mouse usage (all modes)
+set relativenumber
+set number
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
@@ -57,10 +81,8 @@ set foldmethod=marker
 filetype plugin on
 set grepprg =grep\ -nH\ $*
 set autoindent
-set expandtab
-set smarttab
-set shiftwidth =3
-set softtabstop =3
+set shiftwidth =4
+set tabstop=4
 set wildmenu
 set wildmode =list:longest,full
 set backspace =2
@@ -112,12 +134,12 @@ inoremap {<Cr> {<Cr>}<Esc>O
 
 
 " Activate camelcase as default
-map <silent> w <Plug>CamelCaseMotion_w
-map <silent> b <Plug>CamelCaseMotion_b
-map <silent> e <Plug>CamelCaseMotion_e
-sunmap w
-sunmap b
-sunmap e
+" map <silent> w <Plug>CamelCaseMotion_w
+" map <silent> b <Plug>CamelCaseMotion_b
+" map <silent> e <Plug>CamelCaseMotion_e
+" sunmap w
+" sunmap b
+" sunmap e
 
 " <<<<<<<<<<<<<<<<<<<Function Mappings>>>>>>>>>>>>>>>>>>
 " pastes current time with F3 in insert mode.
@@ -128,6 +150,8 @@ nnoremap <F4>  <Esc>:noh<CR><Esc>
 " printer settings 
 set printoptions=paper:letter,number:y
 
+" get rid of swap files
+set noswapfile
 
 " Generate default C++
 autocmd bufnewfile *.cpp so /home/paul/Templates/cppheader.txt
@@ -137,3 +161,7 @@ autocmd Bufwritepre,filewritepre *.cpp execute "normal ma"
 autocmd Bufwritepre,filewritepre *.cpp exe "1," . 9 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
 autocmd bufwritepost,filewritepost *.cpp execute "normal `a"
 
+" latex
+" set grep to always generate a file name
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor='latex'
