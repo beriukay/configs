@@ -126,4 +126,4 @@ _completemarks() {
 }
 complete -F _completemarks jj unmark
 
-export PS1="\e[1;32m[\d \A ~\W]$\e[m "
+PS1='\[\e[1;34m\]\h:\w [\!]\$\[\e[0m\] '
