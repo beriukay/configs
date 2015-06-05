@@ -12,9 +12,9 @@ runtime! debian.vim
 
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Plugin 'gmarik/vundle'
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/vim-easymotion'
 filetype plugin indent on
@@ -24,7 +24,7 @@ autocmd CursorMovedI * if pumvisible() == 0|silent! pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
 filetype off
-execute pathogen#incubate()
+execute pathogen#infect()
 call pathogen#helptags() " generate helptags for everything in 'runtimepath'
 filetype plugin indent on
 
@@ -165,3 +165,5 @@ autocmd bufwritepost,filewritepost *.cpp execute "normal `a"
 " set grep to always generate a file name
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
+
+au FocusLost * silent! wa
