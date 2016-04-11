@@ -10,23 +10,6 @@
 " properly set to work with the Vim-related packages available in Debian.
 runtime! debian.vim
 
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'Lokaltog/vim-easymotion'
-filetype plugin indent on
-
-" get rid of preview window when done
-autocmd CursorMovedI * if pumvisible() == 0|silent! pclose|endif
-autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
-
-filetype off
-execute pathogen#infect()
-call pathogen#helptags() " generate helptags for everything in 'runtimepath'
-filetype plugin indent on
 
 set sessionoptions-=options
 let g:syntastic_cpp_compiler = 'clang++'
@@ -109,12 +92,7 @@ nmap <space> zz
 nmap n nzz
 nmap N Nzz
 
-" Insert mode stuff:
-" when autocomment makes next line commented, this undoes the comment
-" but only guaranteed to work for C++ comments of the form '// '
-inoremap <S-CR> <BS><BS><BS>
-
-" delete previous word like in Windows
+" delete previous word 
 inoremap <C-BS> <Esc>bdawa
 " delete next word with ctrl+shift+backspace
 inoremap <C-S-BS> <Esc>wdawi
@@ -125,21 +103,11 @@ nnoremap <F4> :set hlsearch! hlsearch?<CR>
 " remap jj to esc in insert mode
 inoremap jj <Esc>j
 nnoremap JJJJ <Nop>
-" comments out current line
-inoremap <C-c> <Esc>0i// <Esc>A
 " smart paste from clipboard. Shift+Ins
 inoremap <S-Insert> <ESC>"+p`]a
 " Make { and } open on separate lines with cursor in between
 inoremap {<Cr> {<Cr>}<Esc>O
 
-
-" Activate camelcase as default
-" map <silent> w <Plug>CamelCaseMotion_w
-" map <silent> b <Plug>CamelCaseMotion_b
-" map <silent> e <Plug>CamelCaseMotion_e
-" sunmap w
-" sunmap b
-" sunmap e
 
 " <<<<<<<<<<<<<<<<<<<Function Mappings>>>>>>>>>>>>>>>>>>
 " pastes current time with F3 in insert mode.
@@ -152,14 +120,6 @@ set printoptions=paper:letter,number:y
 
 " get rid of swap files
 set noswapfile
-
-" Generate default C++
-autocmd bufnewfile *.cpp so /home/paul/Templates/cppheader.txt
-autocmd bufnewfile *.cpp exe "1," . 9 . "g/File Name :.*/s//File Name : " .expand("%")
-autocmd bufnewfile *.cpp exe "1," . 9 . "g/Creation Date :.*/s//Creation Date : " .strftime("%m-%d-%Y")
-autocmd Bufwritepre,filewritepre *.cpp execute "normal ma"
-autocmd Bufwritepre,filewritepre *.cpp exe "1," . 9 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
-autocmd bufwritepost,filewritepost *.cpp execute "normal `a"
 
 " latex
 " set grep to always generate a file name
