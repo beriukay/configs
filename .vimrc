@@ -1,5 +1,6 @@
-" All system-wide defaults are set in $VIMRUNTIME/debian.vim (usually just
-" /usr/share/vim/vimcurrent/debian.vim) and sourced by the call to :runtime
+" All system-wide defaults are set in $VIMRUNTIME/debian.vim 
+" (usually just /usr/share/vim/vimcurrent/debian.vim) 
+" and sourced by the call to :runtime
 " you can find below.  If you wish to change any of those settings, you should
 " do it in this file (/etc/vim/vimrc), since debian.vim will be overwritten
 " everytime an upgrade of the vim packages is performed.  It is recommended to
@@ -9,11 +10,6 @@
 " This line should not be removed as it ensures that various options are
 " properly set to work with the Vim-related packages available in Debian.
 runtime! debian.vim
-
-
-set sessionoptions-=options
-let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 
 " enables syntax highlighting by default.
 if has("syntax")
@@ -53,12 +49,14 @@ if filereadable("/etc/vim/vimrc.local")
 source /etc/vim/vimrc.local
 endif
 
+let mapleader=" "
 " Opens vimrc for editing.
 nmap <Leader>v :e /etc/vim/vimrc<CR>
 
 " Set default working dir
-
-colorscheme elflord
+" colorscheme elflord
+colorscheme molokai
+highlight Comment cterm=bold
 set foldmethod=marker
    filetype on
 filetype plugin on
@@ -105,6 +103,8 @@ inoremap jj <Esc>j
 nnoremap JJJJ <Nop>
 " smart paste from clipboard. Shift+Ins
 inoremap <S-Insert> <ESC>"+p`]a
+" set clipboard
+set clipboard=unnamedplus
 " Make { and } open on separate lines with cursor in between
 inoremap {<Cr> {<Cr>}<Esc>O
 
@@ -127,3 +127,15 @@ set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
 
 au FocusLost * silent! wa
+
+" Easier vim splitting
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+set splitbelow
+set splitright
+
+" Make it easy to see the 80th char location
+set colorcolumn=81

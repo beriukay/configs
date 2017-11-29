@@ -80,18 +80,11 @@ fi
 # turn command line into vim!!
 set -o vi
 
-
-#check .bash_aliases for more aliases
-
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
+#check .bash_aliases for more aliases
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
@@ -126,4 +119,11 @@ _completemarks() {
 }
 complete -F _completemarks jj unmark
 
-PS1='\[\e[1;34m\]\h:\w [\!]\$\[\e[0m\] '
+bind Space:magic-space
+shopt -s dotglob # move hidden files with * by default
+
+export EDITOR=vim
+
+PS1='\[\e[1;32m\]\h:\W [\!]\$\[\e[0m\] ' # Local
+#PS1='\[\e[1;34m\]\h:\W [\!]\$\[\e[0m\] ' # Remote Host
+#PS1='\[\e[1;35m\]\h:\W [\!]\$\[\e[0m\] ' # Server 
