@@ -1,0 +1,45 @@
+# ~/.tmuxinator/development.yml
+name: development
+root: ~/
+# Optional tmux socket
+socket_name: foo
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux -CC attach -t development
+
+windows:
+  - editor: 
+    #layout: c942a,346x121,0,0{97x121,0,0,1,116x121,98,0,3,131x60,215,0,6[131x60,215,0,6,131x60,215,61,7]} 
+      # tmux list-windows to get the proper settings
+      # layout: main-vertical
+      # root: /home/user/Projects/LinuxTest/
+      panes:
+        - test:
+            - 
+        - 
+        - changes:
+          - 
+        -
+  - remote: 
+      layout: c0ad,425x122,0,0{106x122,0,0,6,105x122,107,0,12,106x122,213,0,10,105x122,320,0[105x61,320,0,11,105x60,320,62,13]}
+      #layout: 410a,346x121,0,0{93x121,0,0,1,126x121,94,0,6,125x121,221,0[125x60,221,0,7,125x60,221,61,8]} 
+      panes:
+        - helpers: 
+          - 
+        - ftest: 
+          - 
+        - configs:
+          -
+        - idle: 
+          - 
+        - terminal: 
+          - 
+  - console: # empty, runs bash
+    #- mail:
+    #-   panes:
+    #-     - mutt
+    #-     - root mail:
+    #-       - sudo mutt
+    #-       - paul
+
+    #- logs: tail -f log/development.log
