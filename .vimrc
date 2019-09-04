@@ -43,6 +43,7 @@ set hidden             " Hide buffers when they are abandoned
 set mouse=a		" Enable mouse usage (all modes)
 set relativenumber
 set number
+set formatoptions+=j
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
