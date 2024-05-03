@@ -127,3 +127,5 @@ export EDITOR=vim
 PS1='\[\e[1;32m\]\h:\W [\!]\$\[\e[0m\] ' # Local
 #PS1='\[\e[1;34m\]\h:\W [\!]\$\[\e[0m\] ' # Remote Host
 #PS1='\[\e[1;35m\]\h:\W [\!]\$\[\e[0m\] ' # Server 
+eval 
+TWILIO_AC_BASH_SETUP_PATH=/home/paul/.twilio-cli/autocomplete/bash_setup && test -f $TWILIO_AC_BASH_SETUP_PATH && source $TWILIO_AC_BASH_SETUP_PATH; # twilio autocomplete setup
